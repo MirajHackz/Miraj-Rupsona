@@ -4,16 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Miraj ❤️ Rupsona</title>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
 font-family:Poppins,sans-serif;
-height:100vh;overflow:hidden;
-display:flex;justify-content:center;align-items:center;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
 background:linear-gradient(-45deg,#ff4d6d,#ff758f,#ff8fa3,#ffc2d1);
 background-size:400% 400%;
-animation:bg 10s ease infinite;
+animation:bg 12s ease infinite;
 }
 @keyframes bg{
 0%{background-position:0% 50%}
@@ -21,20 +24,142 @@ animation:bg 10s ease infinite;
 100%{background-position:0% 50%}
 }
 .card{
-width:92%;
-max-width:800px;
-padding:30px;
+width:95%;
+max-width:700px;
+padding:25px;
 text-align:center;
 background:rgba(255,255,255,.15);
-backdrop-filter:blur(20px);
+backdrop-filter:blur(18px);
 border-radius:30px;
 color:white;
-box-shadow:0 0 40px rgba(0,0,0,.25);
+box-shadow:0 10px 40px rgba(0,0,0,.2);
 }
-img{
+.photo{
 width:220px;height:220px;
 border-radius:50%;
 object-fit:cover;
+border:5px solid white;
+box-shadow:0 0 30px rgba(255,255,255,.8);
+}
+.title{
+font-family:'Great Vibes',cursive;
+font-size:60px;
+margin:15px 0;
+text-shadow:0 0 15px rgba(255,255,255,.8);
+}
+.question{
+font-size:42px;
+font-weight:700;
+margin:10px 0;
+}
+.text{font-size:18px;margin-bottom:20px}
+.btns{display:flex;justify-content:center;gap:15px;flex-wrap:wrap}
+button{
+padding:15px 30px;
+border:none;
+border-radius:50px;
+font-size:20px;
+font-weight:700;
+cursor:pointer;
+}
+#yes{
+background:linear-gradient(45deg,#ff0080,#ff4da6);
+color:#fff;
+transition:.3s;
+box-shadow:0 0 25px rgba(255,0,128,.8);
+}
+#no{
+background:#444;
+color:#fff;
+}
+.heart{
+position:fixed;
+font-size:30px;
+pointer-events:none;
+animation:float 5s linear forwards;
+}
+@keyframes float{
+from{transform:translateY(100vh)}
+to{transform:translateY(-120px);opacity:0}
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+<img class="photo" src="rupsona.jpg" alt="Photo">
+
+<div class="title">Miraj ❤️ Rupsona</div>
+
+<div class="question">Will You Marry Me? 💍</div>
+
+<p class="text">You are the most beautiful part of my life ❤️</p>
+
+<div class="btns">
+<button id="yes">YES 💖</button>
+<button id="no">NO 😅</button>
+</div>
+</div>
+
+<script>
+const yes=document.getElementById("yes");
+const no=document.getElementById("no");
+
+let size=1;
+
+function grow(e){
+if(e) e.preventDefault();
+
+size += 0.25;
+yes.style.transform=`scale(${size})`;
+
+const msgs=[
+"Really? 😅",
+"Think Again ❤️",
+"Only YES 😍",
+"Nice Try 😂",
+"No Disabled 😎",
+"Choose YES 💖"
+];
+
+no.innerText=msgs[Math.floor(Math.random()*msgs.length)];
+
+for(let i=0;i<12;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML=["❤️","💖","💕","💘"][Math.floor(Math.random()*4)];
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(20+Math.random()*30)+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+}
+
+if(size>4){
+yes.style.position="fixed";
+yes.style.left="50%";
+yes.style.top="50%";
+yes.style.transform="translate(-50%,-50%) scale(4.5)";
+yes.style.zIndex="9999";
+}
+}
+
+no.addEventListener("click",grow);
+no.addEventListener("mouseover",grow);
+no.addEventListener("touchstart",grow);
+
+yes.addEventListener("click",()=>{
+document.body.innerHTML=`
+<div style="display:flex;justify-content:center;align-items:center;height:100vh;flex-direction:column;color:white;text-align:center">
+<h1 style="font-size:90px">💍❤️</h1>
+<h1>YAYYYY! 🎉</h1>
+<h2>Miraj ❤️ Rupsona Forever</h2>
+<p>Thank You For Saying YES 💖</p>
+</div>`;
+});
+</script>
+
+</body>
+</html>object-fit:cover;
 border:5px solid white;
 box-shadow:0 0 30px rgba(255,255,255,.7);
 }
