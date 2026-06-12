@@ -4,29 +4,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Miraj ❤️ Rupsona</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
 body{
-height:100vh;overflow:hidden;display:flex;justify-content:center;align-items:center;
+font-family:Poppins,sans-serif;
+height:100vh;overflow:hidden;
+display:flex;justify-content:center;align-items:center;
 background:linear-gradient(-45deg,#ff4d6d,#ff758f,#ff8fa3,#ffc2d1);
-background-size:400% 400%;animation:bg 12s ease infinite;
+background-size:400% 400%;
+animation:bg 10s ease infinite;
 }
-@keyframes bg{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
+@keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
 .card{
-width:90%;max-width:750px;text-align:center;padding:30px;border-radius:30px;
-background:rgba(255,255,255,.15);backdrop-filter:blur(15px);color:white;
-box-shadow:0 0 40px rgba(0,0,0,.2)
+width:92%;max-width:760px;
+padding:30px;text-align:center;
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(15px);
+border-radius:30px;color:#fff;
+box-shadow:0 0 40px rgba(0,0,0,.2);
 }
-img{width:220px;height:220px;border-radius:50%;object-fit:cover;border:5px solid #fff}
-h1{margin:15px 0}
-.type{min-height:40px;margin:15px 0}
-.btns{position:relative;height:140px}
-button{padding:14px 32px;border:none;border-radius:50px;font-size:20px;cursor:pointer}
-#yes{background:#00d26a;color:#fff}
-#no{background:#ff2e63;color:#fff;position:absolute;left:60%}
-#message{margin-top:20px;font-size:28px;font-weight:bold}
-.floating{position:absolute;animation:float linear forwards}
-@keyframes float{from{transform:translateY(100vh)}to{transform:translateY(-150px);opacity:0}}
+
+.love{
+font-family:'Great Vibes',cursive;
+font-size:58px;
+margin-bottom:10px;
+text-shadow:0 0 15px rgba(255,255,255,.8);
+}
+
+.question{
+font-size:40px;
+font-weight:700;
+margin:15px 0;
+}
+
+img{
+width:220px;height:220px;
+border-radius:50%;
+object-fit:cover;
+border:5px solid white;
+}
+
+button{
+padding:14px 34px;
+border:none;
+border-radius:40px;
+font-size:20px;
+cursor:pointer;
+}
+
+#yes{background:#00c853;color:white;transition:.3s}
+#no{background:#ff1744;color:white;position:fixed;z-index:9999}
+
+.floating{position:fixed;animation:float 6s linear forwards}
+@keyframes float{
+from{transform:translateY(100vh)}
+to{transform:translateY(-120px);opacity:0}
+}
 </style>
 </head>
 <body>
@@ -34,6 +69,64 @@ button{padding:14px 32px;border:none;border-radius:50px;font-size:20px;cursor:po
 <audio id="bgMusic" loop>
 <source src="banjarani.mp3" type="audio/mpeg">
 </audio>
+
+<div class="card">
+<img src="rupsona.jpg" alt="Photo">
+<div class="love">Miraj ❤️ Rupsona</div>
+<div class="question">Will You Marry Me? 💍</div>
+<p>You are the most beautiful part of my life ❤️</p>
+<br>
+<button id="yes">YES 💖</button>
+</div>
+
+<button id="no">NO 😅</button>
+
+<script>
+document.addEventListener("click",()=>{
+document.getElementById("bgMusic").play().catch(()=>{});
+},{once:true});
+
+const noBtn=document.getElementById("no");
+const yesBtn=document.getElementById("yes");
+let scale=1;
+
+function moveNo(){
+const x=Math.random()*(window.innerWidth-noBtn.offsetWidth-20);
+const y=Math.random()*(window.innerHeight-noBtn.offsetHeight-20);
+noBtn.style.left=x+"px";
+noBtn.style.top=y+"px";
+scale+=0.1;
+yesBtn.style.transform=`scale(${scale})`;
+}
+
+moveNo();
+
+noBtn.addEventListener("mouseenter",moveNo);
+noBtn.addEventListener("touchstart",(e)=>{e.preventDefault();moveNo();});
+noBtn.addEventListener("click",(e)=>{e.preventDefault();moveNo();});
+
+yesBtn.onclick=()=>{
+document.querySelector(".card").innerHTML=`
+<h1 style="font-size:80px">💍❤️</h1>
+<h1>YAYYYY! 🎉</h1>
+<h2>Miraj ❤️ Rupsona Forever</h2>
+<p>Thank You For Saying YES 💖</p>
+`;
+
+for(let i=0;i<250;i++){
+let h=document.createElement("div");
+h.className="floating";
+h.innerHTML=["❤️","💖","💕","💘"][Math.floor(Math.random()*4)];
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(20+Math.random()*50)+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),7000);
+}
+noBtn.style.display="none";
+};
+</script>
+</body>
+</html>
 
 <div class="card">
 <img src="rupsona.jpg" alt="Photo">
