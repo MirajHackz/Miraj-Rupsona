@@ -15,25 +15,169 @@ background:linear-gradient(-45deg,#ff4d6d,#ff758f,#ff8fa3,#ffc2d1);
 background-size:400% 400%;
 animation:bg 10s ease infinite;
 }
-@keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-
-.card{
-width:92%;max-width:760px;
-padding:30px;text-align:center;
-background:rgba(255,255,255,.15);
-backdrop-filter:blur(15px);
-border-radius:30px;color:#fff;
-box-shadow:0 0 40px rgba(0,0,0,.2);
+@keyframes bg{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
-
+.card{
+width:92%;
+max-width:800px;
+padding:30px;
+text-align:center;
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(20px);
+border-radius:30px;
+color:white;
+box-shadow:0 0 40px rgba(0,0,0,.25);
+}
+img{
+width:220px;height:220px;
+border-radius:50%;
+object-fit:cover;
+border:5px solid white;
+box-shadow:0 0 30px rgba(255,255,255,.7);
+}
 .love{
 font-family:'Great Vibes',cursive;
-font-size:58px;
-margin-bottom:10px;
+font-size:65px;
+margin:15px 0;
 text-shadow:0 0 15px rgba(255,255,255,.8);
 }
-
 .question{
+font-size:42px;
+font-weight:700;
+margin-bottom:10px;
+}
+.buttons{
+margin-top:25px;
+display:flex;
+justify-content:center;
+gap:20px;
+}
+button{
+padding:15px 35px;
+font-size:20px;
+border:none;
+border-radius:50px;
+cursor:pointer;
+}
+#yes{
+background:linear-gradient(45deg,#ff0080,#ff4da6);
+color:white;
+box-shadow:0 0 25px rgba(255,0,128,.8);
+transition:all .3s ease;
+}
+#no{
+background:#444;
+color:white;
+}
+.floating{
+position:fixed;
+animation:float 6s linear forwards;
+pointer-events:none;
+}
+@keyframes float{
+from{transform:translateY(100vh)}
+to{transform:translateY(-120px);opacity:0}
+}
+</style>
+</head>
+<body>
+
+<audio id="bgMusic" loop>
+<source src="banjarani.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+<img src="rupsona.jpg" alt="Photo">
+
+<div class="love">Miraj ❤️ Rupsona</div>
+
+<div class="question">Will You Marry Me? 💍</div>
+
+<p>You are the most beautiful part of my life ❤️</p>
+
+<div class="buttons">
+<button id="yes">YES 💖</button>
+<button id="no">NO 😅</button>
+</div>
+</div>
+
+<script>
+document.addEventListener("click",()=>{
+document.getElementById("bgMusic").play().catch(()=>{});
+},{once:true});
+
+const noBtn=document.getElementById("no");
+const yesBtn=document.getElementById("yes");
+
+let scale=1;
+
+function growYes(e){
+e.preventDefault();
+
+scale += 0.25;
+
+yesBtn.style.transform=`scale(${scale})`;
+
+const msgs=[
+"No? 😅",
+"Are You Sure? 🤔",
+"Think Again ❤️",
+"Only YES Allowed 💖",
+"Nice Try 😂",
+"NO Disabled 😎"
+];
+
+noBtn.innerHTML=msgs[Math.floor(Math.random()*msgs.length)];
+
+for(let i=0;i<15;i++){
+let h=document.createElement("div");
+h.className="floating";
+h.innerHTML=["❤️","💖","💕","💘"][Math.floor(Math.random()*4)];
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(20+Math.random()*30)+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+}
+
+if(scale>4){
+yesBtn.style.position="fixed";
+yesBtn.style.left="50%";
+yesBtn.style.top="50%";
+yesBtn.style.transform="translate(-50%,-50%) scale(5)";
+yesBtn.style.zIndex="9999";
+}
+}
+
+noBtn.addEventListener("click",growYes);
+noBtn.addEventListener("mouseenter",growYes);
+noBtn.addEventListener("touchstart",growYes);
+
+yesBtn.onclick=()=>{
+document.body.innerHTML=`
+<div style="height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;color:white;text-align:center;">
+<h1 style="font-size:90px;">💍❤️</h1>
+<h1>Thanks 🎉</h1>
+<h2>Miraj ❤️ Rupsona Forever</h2>
+<p>Thank You For Saying YES 💖</p>
+</div>`;
+
+for(let i=0;i<300;i++){
+let h=document.createElement("div");
+h.className="floating";
+h.innerHTML=["❤️","💖","💕","💘","💝"][Math.floor(Math.random()*5)];
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(20+Math.random()*60)+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),7000);
+}
+};
+</script>
+
+</body>
+</html>
 font-size:40px;
 font-weight:700;
 margin:15px 0;
